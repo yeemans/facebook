@@ -1,0 +1,22 @@
+<%# check if viewing own profile, or someone elses %>
+<% if flash[:request_success] %>
+  <p class="subtitle"> <%= flash[:request_success] %> </p>
+<% end %>
+
+<% if flash[:already_sent] %>
+  <p class="subtitle"> <%= flash[:already_sent] %> </p>
+<% end %>
+
+<% if flash[:already_received] %>
+  <p class="subtitle" > <%= flash[:already_received] %> </p>
+<% end %>
+
+<% if current_user.id == params[:id].to_i %> 
+  <h1 class="title is-1"> Your profile </h1>
+<% else %>
+  <h1 class="title is-2"> <%= @profile_owner.username %>'s profile </h1>
+<% end %>
+<%# friend request button %>
+<%= button_to "Send Friend Request", action: "friend_request", 
+params: {:friend_1 => current_user.id, :friend_2 => @profile_owner.id} %>
+<%= @friends.count %>

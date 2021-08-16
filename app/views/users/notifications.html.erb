@@ -1,0 +1,15 @@
+<%# display the friend requests here %>
+<% @friend_requests.each do |r| %>
+  <br>
+  <div class = "columns is-centered">
+    <div>
+      <p class="subtitle"> <%= r.friend_1.username %> </p>
+    </div>
+    
+    <%= button_to "Deny", action: "process_request", params: 
+    {accepted: false, request_id: r.id} %>
+    <%= button_to "Accept", action: "process_request", params: 
+    {accepted: true, request_id: r.id} %>
+  </div>
+<% end %>
+

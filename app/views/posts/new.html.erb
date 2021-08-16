@@ -1,0 +1,5 @@
+<h2 class= "title is-2"> Post Something! </h2>
+<%= form_with model: @post do |form| %>
+  <%= form.text_area :body, size: '60x10' %>
+  <%= form.submit %>
+<% end %>

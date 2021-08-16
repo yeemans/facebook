@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if current_user %>
+      <br>
+      <div class="navbar">
+        <%= link_to "Search", "/search" %>
+        <%= link_to "profile", "/users/#{current_user.id}/profile" %>
+        <%= link_to "Notifications", "/users/#{current_user.id}/notifications"%>
+        <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %>
+      </div>
+    <% end %>
+    <%= yield %>
+
+  </body>
+</html>
