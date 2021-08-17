@@ -5,18 +5,22 @@
 <% end %>
 <h2 class="title is-2"> Your timeline </h2>
 <%# show users last 3 posts %>
+
+<% @recent_posts.each do |post| %>
+  <%= @recent_post.body if @recent_post %>
+<% end %>
 <div class="columns is-multiline">
   <% @recent_posts.concat(@friends_posts).each do |post| %>
     <% if post %>
       <div class="column is-half">
         <div class="message-header">
-          <p> <%= current_user.username %> </p>
+          <p> <%= post.user.username %> </p>
         </div>
         <div class="message-body">
           <%= post.body %>
         </div>
-        <footer>
-          Comment link coming soon
+        <footer class="message-body">
+          <%= link_to "Comment", new_comment_path(post.id) %>
         </footer>
       </div>
     <% end %>

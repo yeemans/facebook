@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
   before_action :authenticate_user!
   # method for search form.
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
       redirect_to "/users/#{@user.id}/profile"
     else   
       flash[:bad_search] = "That person does not exist!"
-      redirect_to "/users/search"
+      redirect_to search_users_path
     end
 
   end
@@ -58,6 +57,8 @@ class UsersController < ApplicationController
       @friendship.save!
       @friendship = @friend_2.friendships.build({friend: @request.friend_1})
       @request.friend_2.friendships << @friendship
+    else  
+      @request.delete
     end 
   end
   # grab all of the users posts
@@ -65,5 +66,9 @@ class UsersController < ApplicationController
     # check if user id is valid 
     @profile_owner = User.find(params[:id])
     @friends = @profile_owner.friends
+  end
+  
+  def index 
+
   end
 end
