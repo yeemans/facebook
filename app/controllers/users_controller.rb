@@ -28,6 +28,11 @@ class UsersController < ApplicationController
       redirect_to  "/users/#{current_user.id}/profile"
       return
     end
+    if @friend_1 == @friend_2 
+      flash[:lonely_ass] = "You can't friend yourself."
+      redirect_to profile_user_path(current_user.id)
+      return 
+    end
     # check if friend request has been received from a user 
     @requests = FriendRequest.where(:friend_1 => @friend_2, :friend_2 => @friend_1)
     if @requests.count > 0 
@@ -52,20 +57,22 @@ class UsersController < ApplicationController
     @request = FriendRequest.find(params[:request_id])
     @friend_1 = User.find(@request.friend_1_id)
     @friend_2 = User.find(@request.friend_2_id)
+    # making sure you cannot friend yourself under any circumstances
     if params[:accepted] == "true" 
       @friendship = @friend_1.friendships.build({friend: @request.friend_2})
       @friendship.save!
       @friendship = @friend_2.friendships.build({friend: @request.friend_1})
       @request.friend_2.friendships << @friendship
+      @request.delete
     else  
       @request.delete
     end 
   end
   # grab all of the users posts
   def profile
-    # check if user id is valid 
     @profile_owner = User.find(params[:id])
     @friends = @profile_owner.friends
+    @posts = @profile_owner.posts
   end
   
   def index 

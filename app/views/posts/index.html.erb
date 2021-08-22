@@ -3,6 +3,13 @@
     <p> <%= flash[:post_success] %> </p>
   </div>
 <% end %>
+
+<% if flash[:like_message] %>
+  <div class="notification is-primary">
+    <p> <%= flash[:like_message] %> </p>
+  </div>
+<% end %>
+
 <h2 class="title is-2"> Your timeline </h2>
 <%# show users last 3 posts %>
 
@@ -14,13 +21,16 @@
     <% if post %>
       <div class="column is-half">
         <div class="message-header">
-          <p> <%= post.user.username %> </p>
+          <img class = "post_pfp" src= <%= post.user.profile_picture %> >
+          <div class="author"> <%= post.user.username %> </div>
         </div>
         <div class="message-body">
           <%= post.body %>
         </div>
         <footer class="message-body">
           <%= link_to "Comment", new_comment_path(post.id) %>
+          <%= link_to image_tag('like.png', size: "24x24"), like_post_path(post.id) %>
+          <%= post.liking_users.count %>
         </footer>
       </div>
     <% end %>

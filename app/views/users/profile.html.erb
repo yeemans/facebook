@@ -11,12 +11,26 @@
   <p class="subtitle" > <%= flash[:already_received] %> </p>
 <% end %>
 
-<% if current_user.id == params[:id].to_i %> 
-  <h1 class="title is-1"> Your profile </h1>
-<% else %>
-  <h1 class="title is-2"> <%= @profile_owner.username %>'s profile </h1>
+
+<% if flash[:lonely_ass] %>
+  <div class="notification is-danger">
+    <p> <%= flash[:lonely_ass] %> </p>
+  </div>
 <% end %>
-<%# friend request button %>
-<%= button_to "Send Friend Request", action: "friend_request", 
-params: {:friend_1 => current_user.id, :friend_2 => @profile_owner.id} %>
-<%= @friends.count %>
+<div class="columns is-multiline">
+  <div class="column is-one-fifth has-background-grey-lighter">
+    <img class="profile_pic is-rounded" src="<%= @profile_owner.profile_picture %>">
+    <%# friend request button %>
+    <br>
+    <p class="subtitle"> <%= @profile_owner.username %> </p>
+    <%= button_to "Send Friend Request", action: "friend_request", 
+    params: {:friend_1 => current_user.id, :friend_2 => @profile_owner.id} %>
+    <p class="subtitle">Friends: <%= @friends.count %> </p>
+  
+  </div>
+  <div class="column is-two-thirds">
+
+  </div>
+</div>
+
+

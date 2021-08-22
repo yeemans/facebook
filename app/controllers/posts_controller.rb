@@ -30,4 +30,18 @@ class PostsController < ApplicationController
   def show 
     
   end
+
+  def like 
+    @post = Post.find(params[:id])
+    # check if user has already liked post
+    if @post.liking_users.include?(current_user)
+      # remove the like 
+      current_user.liked_posts.delete(@post)
+      flash[:like_message] = "Post unliked :(."
+    else  
+      current_user.liked_posts << @post
+      flash[:like_message] = "Post liked."
+    end
+      redirect_to posts_path
+  end
 end
