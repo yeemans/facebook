@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  def index 
+
+  end
   # method for search form.
   def search
 
@@ -73,9 +76,21 @@ class UsersController < ApplicationController
     @profile_owner = User.find(params[:id])
     @friends = @profile_owner.friends
     @posts = @profile_owner.posts
+    if @profile_owner.profile_picture
+      @pfp = @profile_owner.profile_picture
+    else  
+      default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
+      @pfp = default 
+    end
   end
-  
-  def index 
 
+  def pfp_url  
+    
+  end
+
+  def change_pfp 
+    current_user.profile_picture = params[:url]
+    current_user.save!
+    redirect_to profile_user_path
   end
 end

@@ -21,7 +21,11 @@
     <% if post %>
       <div class="column is-half">
         <div class="message-header">
-          <img class = "post_pfp" src= <%= post.user.profile_picture %> >
+          <% if post.user.profile_picture %>
+            <%= image_tag post.user.profile_picture, class: "post_pfp"%>
+          <% else %>
+            <%= image_tag post.user.profile_picture, class: "post_pfp"%>
+          <% end %>
           <div class="author"> <%= post.user.username %> </div>
         </div>
         <div class="message-body">

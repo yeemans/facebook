@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     member do  
       get 'notifications'
       get 'profile'
+      get 'pfp_url'
+      post 'change_pfp'
     end
     collection do 
       post 'friend_request'

@@ -19,7 +19,8 @@
 <% end %>
 <div class="columns is-multiline">
   <div class="column is-one-fifth has-background-grey-lighter">
-    <img class="profile_pic is-rounded" src="<%= @profile_owner.profile_picture %>">
+    <%= link_to image_tag(@pfp, class: "profile_pic is-rounded"), pfp_url_user_path %>
+    
     <%# friend request button %>
     <br>
     <p class="subtitle"> <%= @profile_owner.username %> </p>

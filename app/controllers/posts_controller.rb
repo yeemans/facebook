@@ -12,6 +12,7 @@ class PostsController < ApplicationController
       end
     end
     @friends_posts = @friends_posts.reverse
+    @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
   end
   
   def new 
