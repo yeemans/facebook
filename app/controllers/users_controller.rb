@@ -43,6 +43,8 @@ class UsersController < ApplicationController
       redirect_to "/users/#{current_user.id}/profile"
       return
     end
+
+
     @friend_request = FriendRequest.create({friend_1_id: @friend_1.id, 
     friend_2_id: @friend_2.id})
     # redirect to profile page 
@@ -57,10 +59,13 @@ class UsersController < ApplicationController
   end
 
   def process_request 
+     
     @request = FriendRequest.find(params[:request_id])
     @friend_1 = User.find(@request.friend_1_id)
     @friend_2 = User.find(@request.friend_2_id)
+
     # making sure you cannot friend yourself under any circumstances
+    
     if params[:accepted] == "true" 
       @friendship = @friend_1.friendships.build({friend: @request.friend_2})
       @friendship.save!
@@ -74,6 +79,9 @@ class UsersController < ApplicationController
   # grab all of the users posts
   def profile
     @profile_owner = User.find(params[:id])
+
+    @profile_owner.find_duplicates(:username, delete: {keep: :first})
+    @profile_owner.get_duplicates(:username).dedupe(:username)
     @friends = @profile_owner.friends
     @posts = @profile_owner.posts
     if @profile_owner.profile_picture

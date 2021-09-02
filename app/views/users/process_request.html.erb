@@ -1,6 +1,13 @@
+<%= flash[:testing] %>
 <%= params[:accepted]%>
 <%= @request %>
 <%= @friend_1.username %>
 <% if params[:accepted] == "true" %>
   <p> true </p>
+  <% if @friend_1.friends.include?(@friend_2) %>
+    <p> Friendship exists </p>
+  <% end %>
+  <%= @friend_1.friends.inspect %>
+  <%= @friend_2.friends.inspect %>
+  
 <% end %>

@@ -18,7 +18,7 @@
   </div>
 <% end %>
 <div class="columns is-multiline">
-  <div class="column is-one-fifth has-background-grey-lighter">
+  <div class="column is-one-fifth">
     <%= link_to image_tag(@pfp, class: "profile_pic is-rounded"), pfp_url_user_path %>
     
     <%# friend request button %>
@@ -27,11 +27,15 @@
     <%= button_to "Send Friend Request", action: "friend_request", 
     params: {:friend_1 => current_user.id, :friend_2 => @profile_owner.id} %>
     <p class="subtitle">Friends: <%= @friends.count %> </p>
-  
   </div>
   <div class="column is-two-thirds">
-
+    <% @posts.each do |post| %>
+      <div class="message-body">
+        <%= post.body %>
+      </div>
+    <% end %>
   </div>
+
 </div>
 
 
