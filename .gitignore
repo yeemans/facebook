@@ -37,3 +37,4 @@ yarn-debug.log*
 
 # Ignore application configuration
 /config/application.yml
+/config/test_set.rb

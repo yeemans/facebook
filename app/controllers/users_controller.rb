@@ -79,9 +79,6 @@ class UsersController < ApplicationController
   # grab all of the users posts
   def profile
     @profile_owner = User.find(params[:id])
-
-    @profile_owner.find_duplicates(:username, delete: {keep: :first})
-    @profile_owner.get_duplicates(:username).dedupe(:username)
     @friends = @profile_owner.friends
     @posts = @profile_owner.posts
     if @profile_owner.profile_picture
