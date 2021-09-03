@@ -9,6 +9,7 @@ gem 'dotenv-rails'
 gem "bulma-rails", "~> 0.8.0"
 #gem 'figaro'
 gem "omniauth-rails_csrf_protection"
+gem "sendgrid-ruby"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
