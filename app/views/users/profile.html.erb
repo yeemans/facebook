@@ -11,13 +11,13 @@
   <p class="subtitle" > <%= flash[:already_received] %> </p>
 <% end %>
 
-
 <% if flash[:lonely_ass] %>
   <div class="notification is-danger">
     <p> <%= flash[:lonely_ass] %> </p>
   </div>
 <% end %>
-<div class="columns is-multiline">
+
+<div class="columns is-multiline below-navbar">
   <div class="column is-one-fifth">
     <%= link_to image_tag(@pfp, class: "profile_pic is-rounded"), pfp_url_user_path %>
     

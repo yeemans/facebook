@@ -49,12 +49,9 @@
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
+    margin-bottom: 4%
 }
 
-.nav { 
-    font-size: 1.25em;
-    background-color: white;
-}
 
 /* Links inside the navbar */
 .navbar a {
@@ -72,6 +69,6 @@
     color: black;
 }
 
-#timeline { 
-    margin-top: 4%;
+.below-navbar { 
+    margin-top: 4%
 }

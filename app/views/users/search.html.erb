@@ -1,7 +1,7 @@
 <% if flash[:bad_search] %>
   <p class="subtitle"> <%= flash[:bad_search] %> </p>
 <% end %>
-<%= form_with url: "/search/person", method: :get do |form| %>
+<%= form_with url: "/search/person", method: :get, :class => "below-navbar" do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
   <%= form.submit "Search for User" %>
