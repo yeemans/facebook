@@ -33,6 +33,11 @@
       <div class="message-body">
         <%= post.body %>
       </div>
+         <footer class="message-body">
+          <%= link_to "Comment", new_comment_path(post.id) %>
+          <%= link_to image_tag('like.png', size: "24x24"), like_post_path(post.id) %>
+          <%= post.liking_users.count %>
+        </footer>     
     <% end %>
   </div>
 

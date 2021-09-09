@@ -1,0 +1,19 @@
+<%# display the friend requests here %>
+<div class="below-navbar"> </div>
+<% @users.each do |user| %>
+  <br>
+  <div class = "columns is-centered">
+    <% if !@friends.include?(user) && !@pending_users.include?(user) %>
+      <div>
+        <p class="subtitle"> <%= user.username %> </p>
+      </div>
+    <%= button_to "Send Friend Request", action: "friend_request", 
+    params: {:friend_1 => current_user.id, :friend_2 => user.id} %>
+
+    <% end %>
+  </div>
+<% end %>
+<%# debugging %>
+<%#= @users.inspect %>
+<%#= @pending_users.inspect %>
+

@@ -20,6 +20,7 @@
         <%= link_to "Notifications", notifications_user_path(current_user.id) %> 
         <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %>
         <%= link_to "New Post", new_post_path %> 
+        <%= link_to "Find People", users_path%>
       </div>
     <% end %>
     <%= yield %>

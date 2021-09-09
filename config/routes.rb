@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post 'friend_request'
       post 'process_request'
       get 'search'
+      get 'index'
     end
   end
   

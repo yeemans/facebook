@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def index 
-
+    # get every user except for the logged in one
+    @users = User.where.not(id: current_user.id)
+    # do not show users with pending requests involving current user
+    @requests = FriendRequest.where(friend_1: current_user.id).or( 
+    FriendRequest.where(friend_2_id: current_user.id))
+    # return users in @requests 
+    @pending_users = []
+    @requests.each do |request| 
+      @pending_users.push(User.find(request.friend_1_id))
+      @pending_users.push(User.find(request.friend_2_id))
+    end
+    # do not show user's friends 
+    @friends = current_user.friends
   end
   # method for search form.
   def search
