@@ -27,5 +27,15 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-<%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, :class => "is-google" %>
-<%= render "devise/shared/links" %>
+
+<div class="col-md-3">
+  <%= form_with url: user_google_oauth2_omniauth_authorize_path %>
+    <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+    <button type = "submit" class="btn btn-outline-dark" style="text-transform:none" method="post" >
+      <img width="8%" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      Login with Google
+    </button>
+  <%= render "devise/shared/links"%>
+  </div>
+</div>
+
