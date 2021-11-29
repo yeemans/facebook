@@ -14,9 +14,16 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
 
   after_create :send_registration_email 
+
+  has_many :messages, foreign_key: :receiver_id, class_name: 'Message'  
+  has_many :senders, through: :messagee
+  has_many :messaged, foreign_key: :sender_id, class_name: 'Message'
+  has_many :receivers, through: :messaged
+
   def send_registration_email 
     RegistrationMailer.with(user: self).registration_email.deliver_now
   end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
@@ -31,17 +38,17 @@ class User < ApplicationRecord
      end
     user
   end
-  def self.get_duplicates(*columns)
-    self.order('created_at ASC').select("#{columns.join(',')}, COUNT(*)").group(columns).having("COUNT(*) > 1")
-  end
+  #def self.get_duplicates(*columns)
+ #   self.order('created_at ASC').select("#{columns.join(',')}, COUNT(*)").group(columns).having("COUNT(*) > 1")
+#  end
 
-  def self.dedupe(*columns)
+ # def self.dedupe(*columns)
     # find all models and group them on keys which should be common
-    self.group_by{|x| columns.map{|col| x.send(col)}}.each do |duplicates|
-      first_one = duplicates.shift # or pop to keep last one instead
+  #  self.group_by{|x| columns.map{|col| x.send(col)}}.each do |duplicates|
+   #   first_one = duplicates.shift # or pop to keep last one instead
 
       # if there are any more left, they are duplicates then delete all of them
-      duplicates.each{|x| x.destroy}
-    end
-  end
+   #   duplicates.each{|x| x.destroy}
+    #end
+ # end
 end

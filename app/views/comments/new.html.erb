@@ -1,9 +1,22 @@
 <h2 class="title is-2 below-navbar"> Comments </h2>
-<% @post.comments.each do |comment| %>
-  <p class="subtitle"> <%= comment.body %> </p>
-<% end %>
 <%= form_with model: @comment do |form| %>
   <%= form.text_area :body, size: '60x10' %>
   <%= form.hidden_field :post, :value => params[:id] %>
   <%= form.submit %>
+<% end %>
+
+<br>
+<% @post.comments.each do |comment| %>
+  <div class="message-header has-background-link">
+    <% if comment.user.profile_picture %>
+      <%= image_tag comment.user.profile_picture, class: "post_pfp"%>
+    <% else %>
+      <%= image_tag @default, class: "post_pfp"%>
+    <% end %>
+    <div class="author"> <%= comment.user.username %> </div>
+  </div>
+    <div class="message-body">
+      <p> <%= comment.body %> </p>
+    </div>
+  
 <% end %>

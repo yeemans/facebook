@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   def index 
     @posts = current_user.posts 
+    # get last 3 posts from the user
     @recent_posts = @posts.last(3).reverse
     @friends = current_user.friends 
     # get friends' posts 
@@ -11,6 +12,7 @@ class PostsController < ApplicationController
         @friends_posts.push(post)
       end
     end
+    # reverse the posts to put the most recent ones on top
     @friends_posts = @friends_posts.reverse
     @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
   end
@@ -26,6 +28,14 @@ class PostsController < ApplicationController
       flash[:post_success] = "Post successfully created!" 
       redirect_to posts_path # timeline
     end
+    # broadcast the message to users' friends
+    gon.post_id = @post.id
+    p "GON: #{gon.post_id}"
+    current_user.friends.each do |friend|
+      ActionCable.server.broadcast("post_channel_#{friend.id}", post_id: @post.id)
+      p "Friend id: #{friend.id}"
+    end
+
   end
 
   def show 

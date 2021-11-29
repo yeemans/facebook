@@ -27,6 +27,11 @@
     <%= button_to "Send Friend Request", action: "friend_request", 
     params: {:friend_1 => current_user.id, :friend_2 => @profile_owner.id} %>
     <p class="subtitle">Friends: <%= @friends.count %> </p>
+
+    <%# chat button %>
+    <br>
+    <%= button_to "Chat", action: "chat", 
+    params: {:sender => current_user.id, :receiver => @profile_owner.id} %>
   </div>
   <div class="column is-two-thirds">
     <% @posts.each do |post| %>

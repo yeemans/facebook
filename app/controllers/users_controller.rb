@@ -62,6 +62,8 @@ class UsersController < ApplicationController
     # redirect to profile page 
     if @friend_request.save 
       flash[:request_success] = "Friend request sent!"
+      # broadcast friend request notification 
+      ActionCable.server.broadcast("friend_channel_#{params[:friend_2]}", friend_id: params[:friend_2])
     end
     redirect_to "/users/#{current_user.id}/profile"
   end
@@ -87,6 +89,7 @@ class UsersController < ApplicationController
     else  
       @request.delete
     end 
+    redirect_to "/users/#{current_user.id}/profile"
   end
   # grab all of the users posts
   def profile
@@ -109,5 +112,12 @@ class UsersController < ApplicationController
     current_user.profile_picture = params[:url]
     current_user.save!
     redirect_to profile_user_path
+  end
+
+  def chat 
+    @sender = User.find(params[:sender])
+    @receiver = User.find(params[:receiver])
+    @messages = Message.where(sender_id: @sender.id, receiver_id: @receiver.id).or(Message.where(sender_id: @receiver.id, receiver_id: @sender.id))
+    @chat_id = [@sender.id, @receiver.id].sort.join("") #generates a unique identifier for a pair of users
   end
 end

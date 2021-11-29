@@ -1,11 +1,9 @@
+
 <h2 class="title is-2 below-navbar"> Your timeline </h2>
 <%# show users last 3 posts %>
 
-<% @recent_posts.each do |post| %>
-  <%= @recent_post.body if @recent_post %>
-<% end %>
 <div class="columns is-multiline">
-  <% @recent_posts.concat(@friends_posts).each do |post| %>
+  <% @friends_posts.concat(@recent_posts).each do |post| %>
     <% if post %>
       <div class="column is-half">
         <div class="message-header">
@@ -27,4 +25,7 @@
       </div>
     <% end %>
   <% end %>
+</div>
+<div id="bottom">
+ <%# this div is for adding a link to view new posts %>
 </div>

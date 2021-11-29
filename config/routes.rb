@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get '/auth/:provider/callback' => 'sessions#omniauth'
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
       get 'notifications'
       get 'profile'
       get 'pfp_url'
+      get 'chat'
+      post 'chat'
       post 'change_pfp'
     end
     collection do 
