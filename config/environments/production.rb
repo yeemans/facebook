@@ -120,4 +120,7 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: "https://whispering-savannah-26016.herokuapp.com/" }
+  config.web_socket_server_url = "wss://whispering-savannah.herokuapp.com/cable" 
+  config.action_cable.allowed_request_origins = ['https://whispering-savannah.herokuapp.com', 'http://whispering-savannah.herokuapp.com']
+  
 end
