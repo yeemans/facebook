@@ -11,6 +11,7 @@ gem "bulma-rails", "~> 0.8.0"
 gem "omniauth-rails_csrf_protection"
 gem "sendgrid-ruby"
 gem 'gon', '~> 6.1'
+gem 'redis', '~> 4.5', '>= 4.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
