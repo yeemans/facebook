@@ -6,20 +6,24 @@ Rails.application.routes.draw do
   
   root to: "posts#index"
   resources :users, only: [:index] do  
+
     member do  
       get 'notifications'
       get 'profile'
       get 'pfp_url'
       get 'chat'
+      get 'friends'
       post 'chat'
       post 'change_pfp'
     end
+
     collection do 
       post 'friend_request'
       post 'process_request'
       get 'search'
       get 'index'
     end
+    
   end
   
   resources :posts do 

@@ -3,20 +3,25 @@
 <%# show users last 3 posts %>
 
 <div class="columns is-multiline">
-  <% @friends_posts.concat(@recent_posts).each do |post| %>
+  <% @friends_posts.each do |post_array| %>
+    <% post = post_array[0] %>
+    <% author = post_array[1] %>
     <% if post %>
       <div class="column is-half">
+
         <div class="message-header">
           <% if post.user.profile_picture %>
-            <%= image_tag post.user.profile_picture, class: "post_pfp"%>
+            <%= image_tag post.user.profile_picture, class: "post_pfp" %>
           <% else %>
-            <%= image_tag @default, class: "post_pfp"%>
+            <%= image_tag default, class: "post_pfp" %>
           <% end %>
           <div class="author"> <%= post.user.username %> </div>
         </div>
+
         <div class="message-body">
           <%= post.body %>
         </div>
+        
         <footer class="message-body">
           <%= link_to "Comment", new_comment_path(post.id) %>
           <%= link_to image_tag('like.png', size: "24x24"), like_post_path(post.id) %>

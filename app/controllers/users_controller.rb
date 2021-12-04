@@ -99,6 +99,7 @@ class UsersController < ApplicationController
     if @profile_owner.profile_picture
       @pfp = @profile_owner.profile_picture
     else  
+      # link to default
       default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
       @pfp = default 
     end
@@ -119,5 +120,10 @@ class UsersController < ApplicationController
     @receiver = User.find(params[:receiver])
     @messages = Message.where(sender_id: @sender.id, receiver_id: @receiver.id).or(Message.where(sender_id: @receiver.id, receiver_id: @sender.id))
     @chat_id = [@sender.id, @receiver.id].sort.join("") #generates a unique identifier for a pair of users
+  end
+
+  def friends 
+    @user = User.find(params[:id])
+    @friends = @user.friends 
   end
 end

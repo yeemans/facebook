@@ -1,0 +1,11 @@
+<% @friends.each do |friend|%>
+  <div class="message-header">
+
+    <% if friend.profile_picture %>
+      <%= image_tag friend.profile_picture, class: "post_pfp"%>
+    <% else %>
+      <%= image_tag @default, class: "post_pfp"%>
+    <% end %>
+
+  </div>
+<% end %>

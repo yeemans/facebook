@@ -5,16 +5,26 @@ class PostsController < ApplicationController
     # get last 3 posts from the user
     @recent_posts = @posts.last(3).reverse
     @friends = current_user.friends 
-    # get friends' posts 
+    # get friends' posts, and the friends' pfp
     @friends_posts = []
+
     @friends.each do |friend|
       friend.posts.each do |post| 
-        @friends_posts.push(post)
+        @friends_posts.push([post, post.user])
       end
     end
     # reverse the posts to put the most recent ones on top
     @friends_posts = @friends_posts.reverse
-    @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
+
+    # get user's profile picture
+    if current_user.profile_picture
+      @pfp = current_user.profile_picture
+    else  
+      # link to default pfp
+      default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
+      @pfp = default 
+    end
+
   end
   
   def new 

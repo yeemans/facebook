@@ -32,6 +32,10 @@
     <br>
     <%= button_to "Chat", action: "chat", 
     params: {:sender => current_user.id, :receiver => @profile_owner.id} %>
+    <%# notifications button %>
+    <br>
+    <%= link_to "Notfications", action: "notifications" %>
+    
   </div>
   <div class="column is-two-thirds">
     <% @posts.each do |post| %>
