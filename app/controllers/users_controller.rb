@@ -125,5 +125,6 @@ class UsersController < ApplicationController
   def friends 
     @user = User.find(params[:id])
     @friends = @user.friends 
+    @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
   end
 end

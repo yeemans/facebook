@@ -1,27 +1,27 @@
-
-<h2 class="title is-2 below-navbar"> Your timeline </h2>
 <%# show users last 3 posts %>
+<h2 class= "title is-2 below-navbar"> Post Something! </h2>
+<%= form_with model: @post do |form| %>
+  <%= form.text_area :body %>
+  <%= form.submit %>
+<% end %>
+
+<br>
 
 <div class="columns is-multiline">
-  <% @friends_posts.each do |post_array| %>
-    <% post = post_array[0] %>
-    <% author = post_array[1] %>
+  <% @friends_posts.concat(@recent_posts).each do |post| %>
     <% if post %>
       <div class="column is-half">
-
         <div class="message-header">
           <% if post.user.profile_picture %>
-            <%= image_tag post.user.profile_picture, class: "post_pfp" %>
+            <%= image_tag post.user.profile_picture, class: "post_pfp"%>
           <% else %>
-            <%= image_tag default, class: "post_pfp" %>
+            <%= image_tag @default, class: "post_pfp"%>
           <% end %>
           <div class="author"> <%= post.user.username %> </div>
         </div>
-
         <div class="message-body">
           <%= post.body %>
         </div>
-        
         <footer class="message-body">
           <%= link_to "Comment", new_comment_path(post.id) %>
           <%= link_to image_tag('like.png', size: "24x24"), like_post_path(post.id) %>

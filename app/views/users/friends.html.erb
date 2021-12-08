@@ -1,11 +1,15 @@
-<% @friends.each do |friend|%>
-  <div class="message-header">
+<div class="columns is-multiline">
+  <% @friends.each do |friend|%>
+    <div class="friend-listing column is-half">
 
-    <% if friend.profile_picture %>
-      <%= image_tag friend.profile_picture, class: "post_pfp"%>
-    <% else %>
-      <%= image_tag @default, class: "post_pfp"%>
-    <% end %>
+      <% if friend.profile_picture %>
+        <%= image_tag friend.profile_picture, class: "large_pfp" %>
+      <% else %>
+        <%= image_tag @default, class: "large_pfp" %>
+      <% end %>
 
-  </div>
-<% end %>
+      <%= link_to friend.username, profile_user_url(friend.id) %> 
+
+    </div>
+  <% end %>
+</div>

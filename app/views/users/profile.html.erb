@@ -35,7 +35,8 @@
     <%# notifications button %>
     <br>
     <%= link_to "Notfications", action: "notifications" %>
-    
+    <br>
+    <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %>    
   </div>
   <div class="column is-two-thirds">
     <% @posts.each do |post| %>
