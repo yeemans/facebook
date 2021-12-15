@@ -7,7 +7,8 @@
 
 <br>
 <% @post.comments.each do |comment| %>
-  <div class="message-header has-background-link">
+  
+  <div class="message-header has-background-link" id= "<%= comment.id %>" >
     <% if comment.user.profile_picture %>
       <%= image_tag comment.user.profile_picture, class: "post_pfp"%>
     <% else %>

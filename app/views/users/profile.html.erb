@@ -19,8 +19,11 @@
 
 <div class="columns is-multiline below-navbar">
   <div class="column is-one-fifth">
-    <%= link_to image_tag(@pfp, class: "profile_pic is-rounded"), pfp_url_user_path %>
-    
+    <% if @profile_owner.profile_picture %>
+      <%= link_to image_tag(@profile_owner.profile_picture, class: "profile_pic is-rounded"), pfp_url_user_path %>
+    <% else %>
+      <%= link_to image_tag('default.png', class: "profile_pic is-rounded"), pfp_url_user_path %>
+    <% end %>
     <%# friend request button %>
     <br>
     <p class="subtitle"> <%= @profile_owner.username %> </p>

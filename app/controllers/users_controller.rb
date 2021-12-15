@@ -70,6 +70,7 @@ class UsersController < ApplicationController
 
   def notifications 
     @friend_requests = FriendRequest.where(:friend_2 => current_user)
+    @notifications = current_user.notifications
   end
 
   def process_request 
@@ -96,13 +97,6 @@ class UsersController < ApplicationController
     @profile_owner = User.find(params[:id])
     @friends = @profile_owner.friends
     @posts = @profile_owner.posts
-    if @profile_owner.profile_picture
-      @pfp = @profile_owner.profile_picture
-    else  
-      # link to default
-      default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
-      @pfp = default 
-    end
   end
 
   def pfp_url  
@@ -125,6 +119,5 @@ class UsersController < ApplicationController
   def friends 
     @user = User.find(params[:id])
     @friends = @user.friends 
-    @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_040158) do
+ActiveRecord::Schema.define(version: 2021_12_10_001255) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2021_11_24_040158) do
     t.integer "sender_id"
     t.integer "receiver_id"
     t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "notifier_id"
+    t.integer "receiver_id"
+    t.string "text"
+    t.string "action"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

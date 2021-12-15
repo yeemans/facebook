@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
     if @comment.save 
       redirect_to new_comment_path
     end
+    # create the notification 
+    text = " commented on your post: '#{@comment.body}'"
+    Notification.create({text: text, notifier: current_user, receiver: @post.user, 
+      action: "comment"})
   end 
 
   def edit 

@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     end
     # reverse the posts to put the most recent ones on top
     @friends_posts = @friends_posts.reverse
-    @default = "https://www.online-tech-tips.com/wp-content/uploads/2019/09/discord.jpg"
+   
   end
   
   def new 
@@ -53,6 +53,11 @@ class PostsController < ApplicationController
     else  
       current_user.liked_posts << @post
       flash[:like_message] = "Post liked."
+      # send a notification to owner of post 
+      @owner = @post.user
+      @text = " liked your post."
+      Notification.create({text: @text, notifier: current_user, receiver: @owner, 
+        action: "like"})
     end
       redirect_to posts_path
   end

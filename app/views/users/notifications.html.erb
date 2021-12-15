@@ -1,5 +1,6 @@
 <%# display the friend requests here %>
 <div class="below-navbar"> </div>
+
 <% @friend_requests.each do |r| %>
   <br>
   <div class = "columns is-centered">
@@ -14,3 +15,20 @@
   </div>
 <% end %>
 
+<%# show each notification %>
+<% @notifications.each do |n| %>
+  <% @notifier = User.find(n.notifier.id) %>
+  <div class="notification-listing">
+
+    <%# profile picture with link to profile %>
+    <% if @notifier.profile_picture %>
+      <%= link_to image_tag(@notifier.profile_picture, {:class => "post_pfp"}), profile_user_url(@notifier) %>
+    <% else %>
+      <%= link_to image_tag('default.png', {:class => "post_pfp"}), profile_user_url(@notifier) %>
+    <% end %>
+
+    <p> <%= link_to @notifier.username, profile_user_url(@notifier) %> <%= n.text %> </p>
+
+  </div>
+  
+<% end %>

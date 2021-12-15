@@ -34,7 +34,9 @@
 .post_pfp { 
     height: 32px; 
     width: 32px;
-    
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 .author { 
@@ -78,7 +80,7 @@
     background-color: green;
 }
 
-.friend-listing {  
+.friend-listing, .notification-listing {  
     border-bottom: 2px solid gray; 
 }
 

@@ -5,7 +5,7 @@
       <% if friend.profile_picture %>
         <%= image_tag friend.profile_picture, class: "large_pfp" %>
       <% else %>
-        <%= image_tag @default, class: "large_pfp" %>
+        <%= image_tag 'default.png', class: "large_pfp" %>
       <% end %>
 
       <%= link_to friend.username, profile_user_url(friend.id) %> 
