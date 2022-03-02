@@ -1,13 +1,6 @@
 <%# show users last 3 posts %>
-<h2 class= "title is-2 below-navbar"> Post Something! </h2>
-<%= form_with model: @post do |form| %>
-  <%= form.text_area :body %>
-  <%= form.submit %>
-<% end %>
 
-<br>
-
-<div class="columns is-multiline">
+<div class="columns is-multiline center-parent">
   <% @friends_posts.concat(@recent_posts).each do |post| %>
     <% if post %>
       <div class="column is-half">

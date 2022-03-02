@@ -17,6 +17,14 @@
   </div>
 <% end %>
 
+<h2 class= "title is-2 below-navbar left-align"> Post Something! </h2>
+<%= form_with model: @post do |form| %>
+  <%= form.text_area :body %>
+  <%= form.submit %>
+<% end %>
+
+<br>
+
 <div class="columns is-multiline below-navbar">
   <div class="column is-one-fifth">
     <% if @profile_owner.profile_picture %>

@@ -24,11 +24,25 @@
     <% if current_user %>
       <br>
       <div class="navbar has-background-link">
-        <%= link_to "Timeline", posts_path %>  
-        <%= link_to "Profile", profile_user_path(current_user.id) %> 
-        <%= link_to "Notifications", notifications_user_path(current_user.id), {:id => "notifications"} %> 
-        <%= link_to "Friends", friends_user_path(current_user.id) %> 
-        <%= link_to "People", users_path%>
+        <%= link_to href: posts_path do %>
+          <%= image_tag 'home.png', width: 24, height: 24 %>
+        <% end %>  
+
+        <%= link_to profile_user_path(current_user.id) do %>
+          <%= image_tag 'user.png', width: 24, height: 24 %>
+        <% end %> 
+
+        <%= link_to notifications_user_path(current_user.id), {:id => "notifications"} do %>
+          <%= image_tag 'notification-bell.png', width: 24, height: 24 %>
+        <% end %> 
+
+        <%= link_to friends_user_path(current_user.id) do %> 
+          <%= image_tag 'friends.png', width: 24, height: 24 %> 
+        <% end %>
+
+        <%= link_to users_path do %>
+          <%= image_tag 'people.png', width: 24, height: 24 %>
+        <% end %>
       </div>
     <% end %>
     <%= yield %>
