@@ -10,4 +10,5 @@ import "channels"
 
 Rails.start()
 Turbolinks.start()
-ActiveStorage.start()
+ActiveStorage.start() 
+// Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */

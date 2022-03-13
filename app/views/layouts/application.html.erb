@@ -14,6 +14,7 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -21,30 +22,40 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
         crossorigin="anonymous">
     </script>
+    <script>
+          function showNav() {
+            var links = document.getElementById("links");
+            if (links.style.display === "block") {
+                links.style.display = "none";
+            } else {
+                links.style.display = "block";
+            }
+          }
+    </script>
     <% if current_user %>
       <br>
-      <div class="navbar has-background-link">
-        <%= link_to posts_path do %>
-          <%= image_tag 'home.png', width: 24, height: 24 %>
-        <% end %>  
+      <div class="topnav">
+        
+        <%= link_to "Timeline", posts_path, class: 'active' %>
+        <div id="links"> 
 
-        <%= link_to profile_user_path(current_user.id) do %>
-          <%= image_tag 'user.png', width: 24, height: 24 %>
-        <% end %> 
+          <%= link_to "Profile", profile_user_path(current_user.id) %>
 
-        <%= link_to notifications_user_path(current_user.id), {:id => "notifications"} do %>
-          <%= image_tag 'notification-bell.png', width: 24, height: 24 %>
-        <% end %> 
+          <%= link_to "Notifications", notifications_user_path(current_user.id) %>
 
-        <%= link_to friends_user_path(current_user.id) do %> 
-          <%= image_tag 'friends.png', width: 24, height: 24 %> 
-        <% end %>
+          <%= link_to "Friends", friends_user_path(current_user.id) %> 
 
-        <%= link_to users_path do %>
-          <%= image_tag 'people.png', width: 24, height: 24 %>
-        <% end %>
+          <%= link_to "Find people", users_path %>
+
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="showNav()">
+          <i class="fa fa-bars"></i>
+        </a>
+
       </div>
     <% end %>
+
     <%= yield %>
 
   </body>
