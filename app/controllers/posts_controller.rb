@@ -29,13 +29,6 @@ class PostsController < ApplicationController
       flash[:post_success] = "Post successfully created!" 
       redirect_to posts_path # timeline
     end
-    # broadcast the message to users' friends
-    gon.post_id = @post.id
-    p "GON: #{gon.post_id}"
-    current_user.friends.each do |friend|
-      ActionCable.server.broadcast("post_channel_#{friend.id}", post_id: @post.id)
-      p "Friend id: #{friend.id}"
-    end
 
   end
 
